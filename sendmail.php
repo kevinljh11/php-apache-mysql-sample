@@ -1,35 +1,34 @@
 <?php
-
+ini_set('date.timezone','Asia/Shanghai');
 	/**
-	 * ×¢£º±¾ÓÊ¼şÀà¶¼ÊÇ¾­¹ıÎÒ²âÊÔ³É¹¦ÁËµÄ£¬Èç¹û´ó¼Ò·¢ËÍÓÊ¼şµÄÊ±ºòÓöµ½ÁËÊ§°ÜµÄÎÊÌâ£¬Çë´ÓÒÔÏÂ¼¸µãÅÅ²é£º
-	 * 1. ÓÃ»§ÃûºÍÃÜÂëÊÇ·ñÕıÈ·£»
-	 * 2. ¼ì²éÓÊÏäÉèÖÃÊÇ·ñÆôÓÃÁËsmtp·şÎñ£»
-	 * 3. ÊÇ·ñÊÇphp»·¾³µÄÎÊÌâµ¼ÖÂ£»
-	 * 4. ½«26ĞĞµÄ$smtp->debug = false¸ÄÎªtrue£¬¿ÉÒÔÏÔÊ¾´íÎóĞÅÏ¢£¬È»ºó¿ÉÒÔ¸´ÖÆ±¨´íĞÅÏ¢µ½ÍøÉÏËÑÒ»ÏÂ´íÎóµÄÔ­Òò£»
-	 * 5. Èç¹û»¹ÊÇ²»ÄÜ½â¾ö£¬¿ÉÒÔ·ÃÎÊ£ºhttp://www.daixiaorui.com/read/16.html#viewpl 
-	 *    ÏÂÃæµÄÆÀÂÛÖĞ£¬¿ÉÄÜÓĞÄãÒªÕÒµÄ´ğ°¸¡£
+	 * æ³¨ï¼šæœ¬é‚®ä»¶ç±»éƒ½æ˜¯ç»è¿‡æˆ‘æµ‹è¯•æˆåŠŸäº†çš„ï¼Œå¦‚æœå¤§å®¶å‘é€é‚®ä»¶çš„æ—¶å€™é‡åˆ°äº†å¤±è´¥çš„é—®é¢˜ï¼Œè¯·ä»ä»¥ä¸‹å‡ ç‚¹æ’æŸ¥ï¼š
+	 * 1. ç”¨æˆ·åå’Œå¯†ç æ˜¯å¦æ­£ç¡®ï¼›
+	 * 2. æ£€æŸ¥é‚®ç®±è®¾ç½®æ˜¯å¦å¯ç”¨äº†smtpæœåŠ¡ï¼›
+	 * 3. æ˜¯å¦æ˜¯phpç¯å¢ƒçš„é—®é¢˜å¯¼è‡´ï¼›
+	 * 4. å°†26è¡Œçš„$smtp->debug = falseæ”¹ä¸ºtrueï¼Œå¯ä»¥æ˜¾ç¤ºé”™è¯¯ä¿¡æ¯ï¼Œç„¶åå¯ä»¥å¤åˆ¶æŠ¥é”™ä¿¡æ¯åˆ°ç½‘ä¸Šæœä¸€ä¸‹é”™è¯¯çš„åŸå› ï¼›
+	 * 5. å¦‚æœè¿˜æ˜¯ä¸èƒ½è§£å†³ï¼Œå¯ä»¥è®¿é—®ï¼šhttp://www.daixiaorui.com/read/16.html#viewpl 
+	 *    ä¸‹é¢çš„è¯„è®ºä¸­ï¼Œå¯èƒ½æœ‰ä½ è¦æ‰¾çš„ç­”æ¡ˆã€‚
 	 */
 
 	require_once "email.class.php";
-	//******************** ÅäÖÃĞÅÏ¢ ********************************
-	$smtpserver = "smtp.163.com";//SMTP·şÎñÆ÷
-	$smtpserverport =25;//SMTP·şÎñÆ÷¶Ë¿Ú
-	$smtpusermail = "kevinljh7@163.com";//SMTP·şÎñÆ÷µÄÓÃ»§ÓÊÏä
-	//$smtpemailto = $_POST['toemail'];//·¢ËÍ¸øË­
+	//******************** é…ç½®ä¿¡æ¯ ********************************
+	$smtpserver = "smtp.163.com";//SMTPæœåŠ¡å™¨
+	$smtpserverport =25;//SMTPæœåŠ¡å™¨ç«¯å£
+	$smtpusermail = "kevinljh7@163.com";//SMTPæœåŠ¡å™¨çš„ç”¨æˆ·é‚®ç®±
+	//$smtpemailto = $_POST['toemail'];//å‘é€ç»™è°
 	$smtpemailto ="2971282988@qq.com";
-	$smtpuser = "kevinljh7";//SMTP·şÎñÆ÷µÄÓÃ»§ÕÊºÅ
-	$smtppass = "5533531531";//SMTP·şÎñÆ÷µÄÓÃ»§ÃÜÂë
-	//$mailtitle = $_POST['title'];//ÓÊ¼şÖ÷Ìâ
-	$mailtitle ="¿ÉÒÔÏÂ×¢ÁË";
-	//$mailcontent = "<h1>".$_POST['content']."</h1>";//ÓÊ¼şÄÚÈİ
-	$mailcontent = "<h1>"."¿ÉÒÔÏÂ×¢ÁË"."</h1>";
-	$mailtype = "HTML";//ÓÊ¼ş¸ñÊ½£¨HTML/TXT£©,TXTÎªÎÄ±¾ÓÊ¼ş
-	//************************ ÅäÖÃĞÅÏ¢ ****************************
-	$smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//ÕâÀïÃæµÄÒ»¸ötrueÊÇ±íÊ¾Ê¹ÓÃÉí·İÑéÖ¤,·ñÔò²»Ê¹ÓÃÉí·İÑéÖ¤.
-	$smtp->debug = false;//ÊÇ·ñÏÔÊ¾·¢ËÍµÄµ÷ÊÔĞÅÏ¢
+	$smtpuser = "kevinljh7";//SMTPæœåŠ¡å™¨çš„ç”¨æˆ·å¸å·
+	$smtppass = "5533531531";//SMTPæœåŠ¡å™¨çš„ç”¨æˆ·å¯†ç 
+	//$mailtitle = $_POST['title'];//é‚®ä»¶ä¸»é¢˜
+	$mailtitle ="å¯ä»¥ä¸‹æ³¨äº†";
+	//$mailcontent = "<h1>".$_POST['content']."</h1>";//é‚®ä»¶å†…å®¹
+	$mailcontent = "<h1>"."å¯ä»¥ä¸‹æ³¨äº†"."</h1>";
+	$mailtype = "HTML";//é‚®ä»¶æ ¼å¼ï¼ˆHTML/TXTï¼‰,TXTä¸ºæ–‡æœ¬é‚®ä»¶
+	//************************ é…ç½®ä¿¡æ¯ ****************************
+	$smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//è¿™é‡Œé¢çš„ä¸€ä¸ªtrueæ˜¯è¡¨ç¤ºä½¿ç”¨èº«ä»½éªŒè¯,å¦åˆ™ä¸ä½¿ç”¨èº«ä»½éªŒè¯.
+	$smtp->debug = false;//æ˜¯å¦æ˜¾ç¤ºå‘é€çš„è°ƒè¯•ä¿¡æ¯
 	$state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
 
-	echo "<div style='width:300px; margin:36px auto;'>";
 	if($state==""){
 		echo "sorry! send mail wrong!";
 		exit();
