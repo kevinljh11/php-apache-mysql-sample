@@ -1,3 +1,4 @@
+ini_set('date.timezone','Asia/Shanghai');
 <?php
 class smtp
 
