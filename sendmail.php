@@ -15,14 +15,11 @@ ini_set('date.timezone','Asia/Shanghai');
 	$smtpserver = "smtp.163.com";//SMTP服务器
 	$smtpserverport =25;//SMTP服务器端口
 	$smtpusermail = "kevinljh7@163.com";//SMTP服务器的用户邮箱
-	//$smtpemailto = $_POST['toemail'];//发送给谁
 	$smtpemailto ="2971282988@qq.com";
 	$smtpuser = "kevinljh7";//SMTP服务器的用户帐号
 	$smtppass = "5533531531";//SMTP服务器的用户密码
-	//$mailtitle = $_POST['title'];//邮件主题
-	$mailtitle ="可以下注了";
-	//$mailcontent = "<h1>".$_POST['content']."</h1>";//邮件内容
-	$mailcontent = "<h1>"."可以下注了"."</h1>";
+	$mailtitle =$_GET["text"];
+	$mailcontent = "<h1>".$_GET["text"]."</h1>";//邮件内容
 	$mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
 	//************************ 配置信息 ****************************
 	$smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
@@ -33,6 +30,6 @@ ini_set('date.timezone','Asia/Shanghai');
 		echo "sorry! send mail wrong!";
 		exit();
 	}
-	echo "send mial OK-".date('H:i:s');
+	echo "send mail OK-".date('H:i:s');
 
 ?>
