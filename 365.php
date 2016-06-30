@@ -14,8 +14,8 @@ $data = curl_exec($ch);
 $game=explode("id:",str_replace(array('"',"{","}","[","]"),"",$data));
 FOR ($i =0; $i <count($game); $i++) 
 {
-$ggame[$i]=explode(",h_ld",$game[$i]);
-$gggame=explode(",",$ggame[$i][0]);
+$ggame=explode(",h_ld",$game[$i]);
+$gggame=explode(",",$ggame[0]);
 $szcount=count($gggame);
 if ($szcount>=4)
 {
@@ -23,30 +23,29 @@ $gametime=$gggame[$szcount-1];
 if (strstr($gametime,"status:") && $gametime!="status:\u5168" && $gametime!="status:\u534a" && $gametime!="status:\u672a")
 {
 	
-if (strstr($gggame[$szcount-23],"rd:hg:") && strstr($gggame[$szcount-22],"gg:"))
-{	
- $zhufen=$gggame[$szcount-23];$kefen=$gggame[$szcount-22];
+$zhufen0=explode("rd:hg:",$ggame[0])[1];
+$zhufen1=explode(",gg:",$zhufen0);
+$zhufen=$zhufen1[0];
+$kefen=explode(",",$zhufen1[1])[0];
+
+$zhupos0=explode("p:",$ggame[0]);
+if (count($zhupos0)>=2)
+{
+$zhupos=explode(",",$zhupos0[1])[0];	
+$kepos=explode(",",$zhupos0[2])[0];	
+$kename=$gggame[18];
 }else
 {
-	$zhufen=$gggame[$szcount-19];$kefen=$gggame[$szcount-18];
+$kename=$gggame[17];$zhupos="";$kepos="";$zhupos="p:null";$kepos="p:null";	
 }
 
+$chupan0=explode("sd:f:hrf:",$ggame[0])[1];
+$chupan1=explode(",hdx:",$chupan0);
+$chupan=$chupan1[0];
+$chudx=explode(",",$chupan1[1])[0];
 
-if (strstr($gggame[12],"p:") && strstr($gggame[14],"n:"))
-{	
-$zhupos=$gggame[12];$kename=$gggame[14];$kepos=$gggame[15];
-}else
-{
-	$kename=$gggame[13];$zhupos="";$kepos="";$zhupos="p:null";$kepos="p:null";
-}
-if (strstr($gggame[18],"sd:f:hrf:") && strstr($gggame[19],"hdx:"))
-{	
- $chupan=$gggame[18];$chudx=$gggame[19];
-}else
-{
-	$chupan=$gggame[20];$chudx=$gggame[21];
-}
-$out1.=$gggame[0].",".$gametime.",".$gggame[5].",".$gggame[11].",".$zhupos.",".$kename.",".$kepos.",".$chupan.",".$chudx.",".$zhufen.",".$kefen."#@#";
+
+$out1.=$gggame[0].",".$gametime.",".$gggame[5].",".$gggame[13].",".$zhupos.",".$kename.",".$kepos.",".$chupan.",".$chudx.",".$zhufen.",".$kefen."#@#";
 }
 }
 }
