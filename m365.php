@@ -13,6 +13,9 @@ print('<!DOCTYPE HTML>
 <body bgcolor="black">
 <font color="#C0C0C0">');
 
+$oldtime=time();
+echo date("y-m-d H:i:s")."≈";
+
 $url = "http://live.dszuqiu.com/ajax/score/data?mt=0&nr=1"; 
 $ch = curl_init(); 
 curl_setopt ($ch, CURLOPT_URL, $url); 
@@ -60,6 +63,9 @@ $out1.=$gametime."' ".$gggame[5]." (".$chupan.")".$zhufen.":".$kefen."(".sprintf
 }
 }
 $out2=str_replace(array("status:","n:","p:","sd:f:hrf:","hdx:","rd:hg:","gg:","[null]"),"",$out1);
-echo json_decode('"'.$out2.'"');
-echo "</body></html>";
+$out3=json_decode('"'.$out2.'"');
+$timecha=time()-$oldtime;
+echo $timecha."s dc<br>";
+echo $out3;
+echo "</font></body></html>";
 ?>
