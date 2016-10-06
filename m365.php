@@ -14,7 +14,7 @@ print('<!DOCTYPE HTML>
 <font color="#C0C0C0">');
 
 $oldtime=time();
-echo date("y-m-d H:i:s")."≈";
+echo "时间".date("y-m-d H:i:s")."≈";
 
 $url = "http://live.dszuqiu.com/ajax/score/data?mt=0&nr=1"; 
 $ch = curl_init(); 
