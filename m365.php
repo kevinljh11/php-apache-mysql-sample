@@ -39,6 +39,12 @@ $zhufen0=explode("rd:hg:",$ggame[0])[1];
 $zhufen1=explode(",gg:",$zhufen0);
 $zhufen=$zhufen1[0];
 $kefen=explode(",",$zhufen1[1])[0];
+
+$plus1=explode("plus:",$ggame[0])[1];
+$plusdata=explode(",status",$plus1)[0];
+$plusitem=explode(",",$plusdata);
+$plus="(".$plusitem[4].$plusitem[5].",".$plusitem[6].$plusitem[7].")";	
+	
 $zhupos0=explode("p:",$ggame[0]);
 if (count($zhupos0)>=2)
 {
@@ -56,13 +62,13 @@ $chudx=explode(",",$chupan1[1])[0];
 if (abs($chupan)>=0.75 && $zhufen=="0" && $kefen=="0")
 {
 
-$out1.=$gametime."' ".$gggame[5]." (".$chupan.")".$zhufen.":".$kefen."(".sprintf("%.2f",$chudx).")".$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename."<br>";
+$out1.=$gametime."' ".$gggame[5]." (".$chupan.")".$zhufen.":".$kefen."(".sprintf("%.2f",$chudx).")".$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename.$plus."<br>";
 }
 
 }
 }
 }
-$out2=str_replace(array("status:","n:","p:","sd:f:hrf:","hdx:","rd:hg:","gg:","[null]"),"",$out1);
+$out2=str_replace(array("status:","n:","p:","sd:f:hrf:","hdx:","rd:hg:","gg:","[null]","hso:","gso","hsf:","gsf"),"",$out1);
 $out3=json_decode('"'.$out2.'"');
 $timecha=time()-$oldtime;
 echo $timecha."s dc<br>";
