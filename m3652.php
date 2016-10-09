@@ -2,7 +2,11 @@
 ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727;)'); 
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('date.timezone','Asia/Shanghai');
-
+$gpan = $_GET["p"];
+if ($gpan=="")
+{
+	$gpan=0.5;
+}
 $url = "http://live.dszuqiu.com/ajax/score/data?mt=0&nr=1"; 
 $pid=0;
 $ch = curl_init(); 
@@ -47,7 +51,7 @@ $chupan0=explode("sd:f:hrf:",$ggame[0])[1];
 $chupan1=explode(",hdx:",$chupan0);
 $chupan=$chupan1[0];
 $chudx=explode(",",$chupan1[1])[0];
-if (abs($chupan)>=0.5 && $zhufen=="0" && $kefen=="0")
+if (abs($chupan)>=$gpan && $zhufen=="0" && $kefen=="0")
 {
 $out1.=$pid.".".$plus." ".$gametime."'"." (".$chupan.",".sprintf("%.2f",$chudx).")".$gggame[5]." ".$zhufen.":".$kefen." ".$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename."<br>";
 }
