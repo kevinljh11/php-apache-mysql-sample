@@ -51,7 +51,7 @@ $chupan0=explode("sd:f:hrf:",$ggame[0])[1];
 $chupan1=explode(",hdx:",$chupan0);
 $chupan=$chupan1[0];
 $chudx=explode(",",$chupan1[1])[0];
-if (abs($chupan)>=$gpan && $zhufen=="0" && $kefen=="0")
+if (abs($chupan)>=$gpan)
 {
 $out1.=$id.",(".$plus."),".$gametime."',(".$chupan.",".sprintf("%.2f",$chudx)."),".$gggame[5].",".$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename."<br>";
 }
