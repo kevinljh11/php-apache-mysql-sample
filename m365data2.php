@@ -25,7 +25,8 @@ $szcount=count($gggame);
 if ($szcount>=4)
 {
 $gametime=$gggame[$szcount-1];
-if (strstr($gametime,"status:") && $gametime!="status:\u5168" && $gametime!="status:\u534a" && $gametime!="status:\u672a" && str_replace("status:","",$gametime)<=41)
+$timemin=str_replace("status:","",$gametime);	
+if (strstr($gametime,"status:") && $gametime!="status:\u5168" && $gametime!="status:\u534a" && $gametime!="status:\u672a" && ($timemin>=70 or $timemin<=42))
 {
 	
 $zhufen0=explode("rd:hg:",$ggame[0])[1];
