@@ -67,7 +67,7 @@ $chupan=$chupan1[0];
 $chudx=explode(",",$chupan1[1])[0];
 if (abs($chupan)>=0 && $zhufen=="0" && $kefen=="0")
 {
-$out1.=$gametime."' ".$plus." ".$gggame[5]." (".$chupan.",".sprintf("%.2f",$chudx).")".$zhufen.":".$kefen.$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename."<br>";
+$out1.=$gametime."' ".$plus." ".$gggame[5]." (".$chupan.",".sprintf("%.2f",$chudx).")<".$zhufen.":".$kefen.">".$gggame[13]."[".$zhupos."] vs [".$kepos."]".$kename."<br>";
 }
 }
 }
